@@ -61,6 +61,10 @@ class Order(models.Model):
         self.is_active = False
         self.save()
 
+    @staticmethod
+    def get_item(pk):
+        return Order.objects.get(pk=pk)
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order,
@@ -74,3 +78,7 @@ class OrderItem(models.Model):
 
     def get_product_cost(self):
         return self.product.price * self.quantity
+
+    @staticmethod
+    def get_item(pk):
+        return OrderItem.objects.get(pk=pk)
